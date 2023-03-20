@@ -7,9 +7,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CreateRegistrationComponent } from './create-registration/create-registration.component';
 import { RegistrationListComponent } from './registration-list/registration-list.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
-import { NgToastComponent } from 'ng-angular-popup';
-import { NgToastModule } from 'ng-angular-popup/public-api';
+import { NgToastModule } from 'ng-angular-popup';
 import { NgConfirmModule } from 'ng-confirm-box';
+
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +28,12 @@ import { NgConfirmModule } from 'ng-confirm-box';
     BrowserAnimationsModule,
 
     NgToastModule,
-    NgConfirmModule
+    NgConfirmModule,
+
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
