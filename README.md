@@ -39,6 +39,10 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## How we can create a package
 
 
+## API service used the json server
+## npm i -g json-server
+## json-server --watch db.json
+
 
 
 

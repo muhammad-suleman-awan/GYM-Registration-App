@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { NgToastService } from 'ng-angular-popup';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-create-registration',
@@ -23,7 +25,7 @@ export class CreateRegistrationComponent implements OnInit {
 
   public registerForm!: FormGroup;
 
-  constructor(private fb: FormBuilder){
+  constructor(private fb: FormBuilder, private api: ApiService, private toastService:NgToastService){
     
   }
   ngOnInit(): void {
@@ -43,19 +45,24 @@ export class CreateRegistrationComponent implements OnInit {
     haveGymBefore: [''],
     enquiryDate: ['']
    });   
-  this.registerForm.controls['height'].valueChanges.subscribe(res =>{
+
+  this.registerForm.controls['height'].valueChanges.subscribe(res=>{
     this.calculateBmi(res);
   })
   }
   submit() {
-    console.log(this.registerForm.value);
+    //console.log(this.registerForm.value);
+    this.api.postRegistration(this.registerForm.value)
+    .subscribe(res=>{
+    this.toastService.success({detail:"Success", summary:"Enquiry Addad",duration:3000})
+    this.registerForm.reset();
+})
        }
-       calculateBmi(heightValue: number){
+  calculateBmi(heightValue: number) {
         const weight = this.registerForm.value.height;
         const height = heightValue;
-        const bmi = weight/ (height * height);
+        const bmi = weight / (height * height);
         this.registerForm.controls['bmi'].patchValue(bmi);
-
         switch (true) {
           case bmi < 18.5:
             this.registerForm.controls['bmiResult'].patchValue("Underweight");
@@ -66,6 +73,7 @@ export class CreateRegistrationComponent implements OnInit {
             case (bmi >= 25 && bmi <30):
             this.registerForm.controls['bmiResult'].patchValue("Overweight");
             break;
+            
           default:
             this.registerForm.controls['bmiResult'].patchValue("Obese");
           break;
