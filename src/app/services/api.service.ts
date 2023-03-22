@@ -7,13 +7,13 @@ import { User } from '../models/user.model';
 })
 export class ApiService {
 
-  private baseUrl: string = "http://localhost:3000/enquiry"
+  private baseUrl: string = 'http://localhost:3000/enquiry'
   constructor(private http: HttpClient) { }
   postRegistration(registerObj: User){
     return this.http.post<User>('${this.baseUrl}', registerObj)
   } 
   
-  getRegisteredUser(){
+  getRegisteredUser() {
     return this.http.get<User[]>('${this.baseUrl}')
   }
 

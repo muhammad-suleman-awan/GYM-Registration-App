@@ -9,10 +9,7 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./create-registration.component.scss']
 })
 export class CreateRegistrationComponent implements OnInit {
-  public packages: string[] =[
-  "Monthly",
-  "Quarterly", 
-  "Yearly"];
+  public packages: string[] =["Monthly","Quarterly","Yearly"];
   public genders: string[] = ["Male", "Female"];
   public imporotantList: string[] =[
     "Toxic Fat reduction",
@@ -25,7 +22,7 @@ export class CreateRegistrationComponent implements OnInit {
 
   public registerForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private api: ApiService, private toastService:NgToastService){
+  constructor(private fb: FormBuilder, private api: ApiService, private toastService: NgToastService){
     
   }
   ngOnInit(): void {
@@ -50,13 +47,12 @@ export class CreateRegistrationComponent implements OnInit {
     this.calculateBmi(res);
   })
   }
-  submit() {
-    //console.log(this.registerForm.value);
+  submit() {   
     this.api.postRegistration(this.registerForm.value)
     .subscribe(res=>{
-    this.toastService.success({detail:"Success", summary:"Enquiry Addad",duration:3000})
-    this.registerForm.reset();
-})
+     this.toastService.success({detail:"Success", summary:"Enquiry Added", duration:3000});
+     this.registerForm.reset();
+ })
        }
   calculateBmi(heightValue: number) {
         const weight = this.registerForm.value.height;

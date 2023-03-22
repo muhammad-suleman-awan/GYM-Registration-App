@@ -40,9 +40,15 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 
 ## API service used the json server
-## npm i -g json-server
-## json-server --watch db.json
+## create npm i -g json-server
+## Run   json-server --watch db.json
 
+## //console.log(this.registerForm.value);
+## this.api.postRegistration(this.registerForm.value)
+ ##   .subscribe(res=>{
+ ##    this.toastService.success({detail:"Success", summary:"Enquiry    ##Added", duration:3000});
+   ##  this.registerForm.reset();
+## })
 
 
 
