@@ -1,3 +1,21 @@
 {
-  "enquiry": []
+  "enquiry": [
+    {
+      "firstName": "23",
+      "lastName": "23",
+      "email": "",
+      "mobile": "",
+      "weight": "",
+      "height": "",
+      "bmi": "",
+      "bmiResult": "",
+      "gender": "",
+      "requireTrainer": "",
+      "package": "",
+      "important": "",
+      "haveGymBefore": "",
+      "enquiryDate": "",
+      "id": 1
+    }
+  ]
 }

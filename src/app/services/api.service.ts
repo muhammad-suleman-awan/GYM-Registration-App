@@ -7,26 +7,26 @@ import { User } from '../models/user.model';
 })
 export class ApiService {
 
-  private baseUrl: string = 'http://localhost:3000/enquiry'
+  private baseUrl: string = "http://localhost:3000/enquiry"
   constructor(private http: HttpClient) { }
   postRegistration(registerObj: User){
-    return this.http.post<User>('${this.baseUrl}', registerObj)
+    return this.http.post<User>(`${this.baseUrl}`, registerObj)
   } 
   
   getRegisteredUser() {
-    return this.http.get<User[]>('${this.baseUrl}')
+    return this.http.get<User[]>(`${this.baseUrl}`)
   }
 
   updateRegisterUser(registerObj: User, id: number){
-    return this.http.put<User>('${this.baseUrl}/${id}', registerObj)
+    return this.http.put<User>(`${this.baseUrl}/${id}`, registerObj)
   }
 
   deleteRegistered(id: number){
-    return this.http.delete<User>('${this.baseUrl}/${id}')
+    return this.http.delete<User>(`${this.baseUrl}/${id}`)
   }
 
   getRegisteredUserId(id: number){
-    return this.http.get<User>('${this.baseUrl}/${id}')
+    return this.http.get<User>(`${this.baseUrl}/${id}`)
   }
 
 }

@@ -24,6 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import {MatCardModule} from '@angular/material/card';
+
 
 
 
@@ -60,7 +62,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatCardModule
 
   ],
   providers: [],

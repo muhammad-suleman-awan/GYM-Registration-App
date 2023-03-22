@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
+import { User } from '../models/user.model';
 import { ApiService } from '../services/api.service';
 
 @Component({
@@ -21,8 +23,14 @@ export class CreateRegistrationComponent implements OnInit {
   ];
 
   public registerForm!: FormGroup;
+  public userIdToUpdate!: number;
+  public isUpdateActive: boolean = false; 
 
-  constructor(private fb: FormBuilder, private api: ApiService, private toastService: NgToastService){
+  constructor(private fb: FormBuilder,
+    private activedRoute: ActivatedRoute, 
+    private api: ApiService, 
+    private router: Router,
+    private toastService: NgToastService){
     
   }
   ngOnInit(): void {
@@ -46,6 +54,15 @@ export class CreateRegistrationComponent implements OnInit {
   this.registerForm.controls['height'].valueChanges.subscribe(res=>{
     this.calculateBmi(res);
   })
+
+  this.activedRoute.params.subscribe(val=>{
+    this.userIdToUpdate = val['id'];
+    this.api.getRegisteredUserId(this.userIdToUpdate)
+    .subscribe(res => {
+     this.isUpdateActive = true;
+     this.fillFormToUpdate(res)
+    })
+  })
   }
   submit() {   
     this.api.postRegistration(this.registerForm.value)
@@ -53,7 +70,16 @@ export class CreateRegistrationComponent implements OnInit {
      this.toastService.success({detail:"Success", summary:"Enquiry Added", duration:3000});
      this.registerForm.reset();
  })
-       }
+}
+update(){
+  this.api.updateRegisterUser(this.registerForm.value, this.userIdToUpdate)
+    .subscribe(res=>{
+     this.toastService.success({detail:"Success", summary:"Enquiry Updated", duration:3000});
+     this.registerForm.reset();
+     this.router.navigate('list')
+ })
+}
+
   calculateBmi(heightValue: number) {
         const weight = this.registerForm.value.height;
         const height = heightValue;
@@ -75,5 +101,27 @@ export class CreateRegistrationComponent implements OnInit {
           break;
         }
        }
+
+fillFormToUpdate(user: User){
+  this.registerForm.setValue({
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email,
+    mobile: user.mobile,
+    weight: user.weight,
+    height: user.height,
+    bmi: user.bmi,
+    bmiResult: user.bmiResult,
+    gender: user.gender,
+    requireTrainer: user.requireTrainer,
+    package: user.package,
+    important: user.important,
+    haveGymBefore: user.haveGymBefore,
+    enquiryDate: user.enquiryDate 
+  })
+
+}
+      
+
 }
 
