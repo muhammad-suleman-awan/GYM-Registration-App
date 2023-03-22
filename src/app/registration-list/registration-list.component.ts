@@ -64,7 +64,7 @@ export class RegistrationListComponent implements OnInit {
 
   delete(id: number) {
     this.confirm.showConfirm(
-      'Are you sure want to Delete?',
+      "Are you sure want to Delete?",
       () => {
         this.api.deleteRegistered(id)
         .subscribe(res => {
