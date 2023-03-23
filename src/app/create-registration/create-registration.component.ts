@@ -76,7 +76,7 @@ update(){
     .subscribe(res=>{
      this.toastService.success({detail:"Success", summary:"Enquiry Updated", duration:3000});
      this.registerForm.reset();
-     this.router.navigate('list')
+     this.router.navigate(['list'])
  })
 }
 

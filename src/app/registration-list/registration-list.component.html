@@ -19,7 +19,7 @@
       <!-- ID Column -->
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-        <td mat-cell *matCellDef="let row"> {{row.firstName}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
       </ng-container>
   
       <!-- FirstName Column -->
@@ -47,7 +47,7 @@
       </ng-container>
 
       <!-- bmiResult Column -->
-      <ng-container matColumnDef="email">
+      <ng-container matColumnDef="bmiResult">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> bmiResult </th>
         <td mat-cell *matCellDef="let row"> {{row.bmiResult}} </td>
       </ng-container>

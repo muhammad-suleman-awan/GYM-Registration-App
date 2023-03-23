@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ApiService {
+  getRegisteredUserId: any;
   deleteRegistered(id: number) {
     throw new Error('Method not implemented.');
   }

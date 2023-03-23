@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api.service';
 import { User } from '../models/user.model';
@@ -8,24 +8,27 @@ import { User } from '../models/user.model';
   templateUrl: './user-detail.component.html',
   styleUrls: ['./user-detail.component.scss']
 })
-export class UserDetailComponent implements OnInit{
+export class UserDetailComponent implements OnInit {
 
   public userID!: number;
   userDetail!: User
-  constructor(private activeRoute: ActivatedRoute, private api: ApiService)
+  constructor( private activatedRoute: ActivatedRoute, private api: ApiService){ 
 
 }
-ngOnInit(): void {
-  this.activedRoute.params.subscribe(val=>{
-    this.userID = val['id'];
-    this.fetchUserDetails(this.userID);
-  })
-}
 
-fetchUserDetails(userID: number){
-  this.api.getRegisteredUserId(userID)
-  .subscribe(res=>{
-    this.userDetail = res;
-    console.log(this.userDetail)
-  })
+  ngOnInit(): void {
+      this.activatedRoute.params.subscribe(val=>{
+        this.userID = val['id'];
+        this.fetchUserDetails(this.userID);
+      })
+  } 
+
+  fetchUserDetails(userid: number){
+    this.api.getRegisteredUserId(userid)
+    .subscribe((res: User)=>{
+      this.userDetail = res;
+      console.log(this.userDetail);
+    })
+  }
+
 }
